@@ -10,7 +10,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Zach Townsend Portfolio' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i' }
     ]
   },
   /*
