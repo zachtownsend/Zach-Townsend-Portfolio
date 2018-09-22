@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
   /*
   ** Headers of the page
@@ -11,7 +13,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i' }
     ]
   },
   /*
@@ -34,7 +36,12 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        '$' : 'jquery',
+      })
+    ]
   }
 }
 

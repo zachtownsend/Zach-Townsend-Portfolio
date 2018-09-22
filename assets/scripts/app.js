@@ -1,7 +1,7 @@
+import {TweenMax, Power2, TimelineLite} from "gsap";
+
 if (process.browser) {
-  console.log('test');
-  window.addEventListener('loaded', () => {
-    alert('test');
-  });
+  // Code goes here
+  console.dir(TweenMax);
 }
 
