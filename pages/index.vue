@@ -11,10 +11,11 @@
           <span class="target">
             <animated-letters
               text="Zach Townsend"
-              :duration="0.2"
-              :stagger="0.07"
+              ease="Expo.easeOut"
+              :duration="1"
+              :stagger="0"
+              :delay="0.4"
               :from="{ y: '-100%' }"
-              :to="{ y: '0%' }"
             />
           </span>
         </span>
@@ -22,6 +23,7 @@
       <p class="sub-title">
         <animated-letters
           text="Freelance Web Developer"
+          :delay="1"
           :duration="0.2"
           :stagger="0.07"
         />
@@ -30,34 +32,31 @@
           text="based in "
           :duration="0.2"
           :stagger="0.07"
-          :delay="1.68"
+          :delay="2.68"
         />
         <span class="highlight">
           <animated-letters
             text="Berlin"
             :duration="0.2"
             :stagger="0.2"
-            :delay="2.38"
+            :delay="3.38"
           />
         </span>
       </p>
     </div>
+
+    <transitioning-navigation />
   </section>
 </template>
 
 <script>
-  // import '../assets/scripts/app.js';
-  import { TweenMax } from 'gsap';
   import AnimatedLetters from '~/components/AnimatedLetters.vue';
-
-  if (process.browser) {
-    // console.log($('.target', 'h1.title'));
-    // TweenMax.fromTo($('.target', 'h1.title'), 0.8, { y: -parseInt($('h1.title').outerHeight(), 10) }, { y: 0 });
-  }
+  import TransitioningNavigation from '~/components/TransitioningNavigation.vue';
 
   export default {
     components: {
-      AnimatedLetters
+      AnimatedLetters,
+      TransitioningNavigation,
     }
   }
 </script>

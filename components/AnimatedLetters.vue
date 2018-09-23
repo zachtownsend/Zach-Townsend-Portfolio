@@ -30,8 +30,12 @@
       },
       to: {
         type: Object,
-        default: () => ({ opacity: 1 })
-      }
+        default: () => ({})
+      },
+      ease: {
+        type: String,
+        default: () => (''),
+      },
     },
     computed: {
       splitText: function() {
@@ -40,25 +44,62 @@
         }).join('</span><span>');
         return `<span>${splitText}</span>`;
       },
-      toVar: function() {
-        const { to } = this;
+      fromVar: function() {
+        const {
+          to,
+          from,
+          delay,
+          ease,
+        } = this;
 
-        if (this.delay) {
-          to.delay = this.delay;
+        if (_.isEmpty(to)) {
+          if (delay) {
+            from.delay = delay;
+          }
+        }
+
+        if (!_.isEmpty(ease)) {
+          const easeObject = ease.split('.');
+          console.dir(ease);
+          from.ease = window[easeObject[0]][easeObject[1]];
+          if (_.isFunction(from.ease) && easeObject[2] !== undefined) {
+            from.ease = from.ease(easeObject[2]);
+          }
+        }
+
+        return from;
+      },
+      toVar: function() {
+        const {
+          to,
+          delay
+        } = this;
+
+        if (delay) {
+          to.delay = delay;
         }
 
         return to;
       }
     },
-    methods: {
-      showAlert() {
-        alert(`${this.greeting}, you clicked!`);
-      }
-    },
     mounted: function() {
-      const letters = this.$el.querySelectorAll('span');
-      console.dir(letters);
-      TweenMax.staggerFromTo(letters, this.duration, this.from, this.toVar, this.stagger);
+      const {
+        $el,
+        duration,
+        from,
+        to,
+        fromVar,
+        toVar,
+        stagger,
+      } = this;
+
+      const letters = $el.querySelectorAll('span');
+
+      if (_.isEmpty(to)) {
+        TweenMax.staggerFromTo(letters, duration, fromVar, toVar, stagger);
+      } else {
+        TweenMax.staggerFrom(letters, duration, fromVar, stagger);
+      }
     }
   }
 </script>
